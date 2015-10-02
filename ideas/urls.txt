@@ -1,3 +1,5 @@
-http://www.usna.edu/Users/cs/nchamber/courses/nlp/f12/project.html 
+http://www.usna.edu/Users/cs/nchamber/courses/nlp/f12/project.html
+
+// few ideas needs thinking on Event extraction and Prediction of events 
 
 
