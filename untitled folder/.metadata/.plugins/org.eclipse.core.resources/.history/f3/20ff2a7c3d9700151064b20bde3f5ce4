@@ -1,0 +1,17 @@
+
+/**
+ * @author Prashant
+ * @created_date 30th Nov 2015  
+ * @Description Hidden Markov Model Implementation using Vitrebi Algorithm 
+ */
+
+
+public class HMMImpl {
+	public static void main(String[] args) {
+		// read train files 
+		String trainFile = "/Users/Prashant/NLPProject/brown-train-sentences.txt";
+		String traintagFile = "/Users/Prashant/NLPProject/brown-train-tags.txt";
+		
+		
+	}
+}

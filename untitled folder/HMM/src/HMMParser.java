@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -28,7 +29,7 @@ public class HMMParser {
 	public HMMParser(String inputFileName) {
 		File file = new File(inputFileName);
 		try {
-			sc = new Scanner(inputFileName);
+			sc = new Scanner(file);
 		} catch (Exception ex) {
 			System.err.println("Error in reading file " + inputFileName);
 			ex.printStackTrace();
@@ -63,6 +64,15 @@ public class HMMParser {
 
 		}
 	}
+	
+	public ArrayList<String> wordSequence(){
+        ArrayList<String> list = new ArrayList<String>();
+        while (sc.hasNext()){
+            sc.next();
+            list.add(sc.next());
+        }
+        return list;
+    }
 
 	public void addOne(HashMap<String, Integer> map, String keya) {
 		if (map.containsKey(keya)) {

@@ -1,0 +1,47 @@
+import java.io.File;
+import java.util.HashMap;
+import java.util.Scanner;
+
+/*
+ * @Author : Prashant Prakash
+ * @Email Id : pxp141730@utdallas.edu
+ * @Created Date : 26th Nov 2015 
+ * 
+ */
+
+public class HMMParser {
+	/* Variables initialization to hold references 	
+	 */
+	Scanner sc ;
+	HashMap<String, Integer> tagCounts = new HashMap<String,Integer>();
+	HashMap<String, HashMap<String,Integer>> wordCounts = new HashMap<String,HashMap<String,Integer>>();
+	HashMap<String, HashMap<String, Integer>> tagBigramCounts = new HashMap<String, HashMap<String,Integer>>();
+    HashMap<String, HashMap<String, Integer>> tagForWordCounts = new HashMap<String, HashMap<String, Integer>>();
+    String mostFreqTag = "";
+    int mostFreqTagCount = 0;
+    int numTrainingBigrams = 0;
+    
+	
+	
+	/*
+	 * Constructor to initialize  
+	 */
+	public HMMParser(String inputFileName) {
+		File file = new File(inputFileName);
+		try{
+			sc = new Scanner(inputFileName);
+		}catch(Exception ex) {
+		  System.err.println("Error in reading file " + inputFileName);
+		  ex.printStackTrace();
+		}
+	}
+	
+	/*
+	 * function to parse file and store results  
+	 */
+	
+	public void parseTrainer() {
+		
+	}
+	
+}

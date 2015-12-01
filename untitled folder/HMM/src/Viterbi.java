@@ -1,0 +1,134 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+/**
+ * @author Prashant
+ * @created_date 1st dec 2015 
+ * @description to perfrom Vitrebi Algorithm to obtain best tag in the sentence
+ */
+public class Viterbi {
+	
+	
+	 /**
+     * ViterbiFile
+     *
+     * Method to perform Viterbi tagging on a file. Will return the tagged file
+     * @param filename input file to be tagged
+     * @return filename of the tagged file
+     */
+    public String viterbionTestFile(String filename,HMMModel hmmModel){
+        String tagfile = null;
+        BufferedReader input = null;
+        BufferedWriter output = null;
+        try{
+            tagfile = filename.substring(0,filename.length()-4) + "_Viterbi_tag.txt";
+            input = new BufferedReader(new FileReader(filename));
+            output = new BufferedWriter(new FileWriter(tagfile));
+            String line = null, tagline = null;
+
+            while((line=input.readLine()) != null){ // perform viterbi taging line by line and write to output file
+                tagline = viterbiAlgorithm(line,hmmModel);
+                output.write(tagline+"\n");
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }finally{
+            // Close file if file exist. If not, catch the exception
+            try{
+                input.close();
+                output.close();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return(tagfile);
+        }
+    }
+	
+	
+	
+	/**
+     * Viterbi
+     *
+     * Method to perform Viterbi tagging and backtracing
+     *
+     * @param input the sentence to be tagged
+     * @return result - the tags associated with the sentence
+     */
+    public String viterbiAlgorithm(String input,HMMModel hmmModel){
+
+        String result = null, lasttag = null;
+        double highestscore = Double.NEGATIVE_INFINITY; // highest score in the Viterbi tagging. Set to negative infinity since score < 0
+        Stack<String> toprint = new Stack<String>(); // the stack for printing to result
+        List<Map<String,String>> backtrace = new ArrayList<Map<String,String>>(); // List of current tag -> previous tag
+        String[] words = input.split(Constant.SPACES); // the array of words
+
+        Set<String> prevstates = new TreeSet<>(); // the previous states
+        prevstates.add(Constant.START); // start with "<s>"
+
+        Map<String,Double> prevscores = new TreeMap<>(); // the previous scores
+        prevscores.put(Constant.START,0.0); // probability of starting is 100%
+
+        for(int i=0; i<words.length;i++){
+            Set<String> nextstates = new TreeSet<>();
+            Map<String,Double> nextscores = new TreeMap<>();
+            Map<String,String> backpoint = new TreeMap<>();
+            double score;
+
+            for(String state: prevstates){ // for all previous tags
+                if(hmmModel.getTransition().containsKey(state) && !hmmModel.getTransition().get(state).isEmpty()) {
+                    for (String transit : hmmModel.getTransition().get(state).keySet()) { // for all transition of previous -> current tag
+                        nextstates.add(transit);
+
+                        if (hmmModel.getEmission().containsKey(transit) && hmmModel.getEmission().get(transit).containsKey(words[i])) { // if word is in emission
+                            score = prevscores.get(state) + hmmModel.getTransition().get(state).get(transit) + hmmModel.getEmission().get(transit).get(words[i]);
+                        }else { // if word is unseen, use an unseen score , handle unseen
+                            score = prevscores.get(state) + hmmModel.getTransition().get(state).get(transit) + -100;
+                        }
+                        if (!nextscores.containsKey(transit) || score > nextscores.get(transit)) {
+                            nextscores.put(transit, score); // keep track of the highest score
+                            backpoint.put(transit, state); // for backtracing later on
+                            if(backtrace.size()>i ) backtrace.remove(i); // remove the last element if required to update the last element
+                            backtrace.add(backpoint);
+                        }
+                    }
+                }
+            }
+            prevscores = nextscores;
+            prevstates = nextstates;
+        }
+
+        //Find the last tag for backtracing
+        for(String score: prevscores.keySet()){
+            if(prevscores.get(score)>highestscore){
+                highestscore = prevscores.get(score);
+                lasttag = score;
+            }
+        }
+
+        // Perform Backtrace
+        toprint.push(lasttag);
+        for(int i = words.length-1; i>0; i--){
+            toprint.push(backtrace.get(i).get(toprint.peek()));
+        }
+
+        //Print to result
+        while(!toprint.isEmpty()){
+            if(result==null) result = (toprint.pop()+" ");
+            else result += (toprint.pop()+" ");
+        }
+        return(result);
+    }
+
+
+}

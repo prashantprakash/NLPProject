@@ -1,0 +1,24 @@
+import java.io.File;
+
+/*
+ * @Author : Prashant Prakash
+ * @Email Id : pxp141730@utdallas.edu
+ * @Created Date : 26th Nov 2015 
+ * 
+ */
+
+public class HMMParser {
+
+	/*
+	 * Constructor to initialize  
+	 */
+	public HMMParser(String inputFileName) {
+		File file = new File(inputFileName);
+		try{
+			
+		}catch(Exception ex) {
+		  System.err.println("Error in reading file " + inputFileName);
+		  ex.printStackTrace();
+		}
+	}
+}

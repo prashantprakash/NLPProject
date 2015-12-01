@@ -1,0 +1,75 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Map;
+import java.util.TreeMap;
+
+/**
+ * @author Prashant
+ * @created_date 30th Nov 2015
+ * @Description Generate HMM model
+ *
+ */
+public class HMMModel {
+
+	// all instance variables decalration
+
+	private static Map<String, Map<String, Double>> transition; // previous tag
+																// -> (current
+																// tag ->
+																// P(current|previous))
+	private static Map<String, Map<String, Double>> emission; // tag -> (word ->
+																// P(tag|word))
+
+	/**
+	 * @param trainFile
+	 *            contains all the sentences
+	 * @param tagFile
+	 *            contains all the tags for the words mentioned in trainFile
+	 * @function build training model using hidden Markov Model
+	 */
+	public void trainModel(String trainFile, String tagFile) {
+		BufferedReader wordFileReader = null, tagFileReader = null;
+		try {
+			wordFileReader = new BufferedReader(new FileReader(trainFile)); // Open
+																			// train
+																			// file
+			tagFileReader = new BufferedReader(new FileReader(tagFile)); // Open
+																			// tag
+																			// file
+		} catch (Exception ex) {
+			System.err.println("Error in opening training Files");
+			ex.printStackTrace();
+		}
+
+		String word, tagword;
+
+		try {
+			while ((word = wordFileReader.readLine()) != null && (tagword = tagFileReader.readLine()) != null) { // read
+				 // split word and tag using spaces																									// the
+				 String[] wordArray = word.split(Constant.SPACES);
+	             String[] tagArray = tagword.split(Constant.SPACES);																							// file
+	             
+	          // Fill in the emission map with number of emissions
+	                for(int i=0; i<wordArray.length; i++){
+	                    if(!emission.containsKey(tagArray[i])) { // if the tag appears for the first time
+	                        Map<String,Double> word2value = new TreeMap<>();
+	                        word2value.put(wordArray[i],Constant.DOUBLEONE);
+	                        emission.put(tagArray[i],word2value);
+	                    }else {
+	                        if (!emission.get(tagArray[i]).containsKey(wordArray[i])) { // if the word appeared with the tag for the first time
+	                            emission.get(tagArray[i]).put(wordArray[i], Constant.DOUBLEONE);
+	                        } else { // if the word has already appeared with the tag
+	                            double newvalue = emission.get(tagArray[i]).get(wordArray[i]) + 1;
+	                            emission.get(tagArray[i]).put(wordArray[i], newvalue);
+	                        }
+	                    }
+	                }
+			}
+		} catch (Exception ex) {
+			System.err.println("Error in reading training File");
+			ex.printStackTrace();
+		}
+
+	}
+
+}

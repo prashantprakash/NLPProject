@@ -1,0 +1,38 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Map;
+
+/**
+ * @author Prashant
+ * @created_date 30th Nov 2015
+ * @Description Generate HMM model 
+ *
+ */
+public class HMMModel {
+	
+	// all instance variables decalration 
+	
+	 private static Map<String,Map<String, Double>> transition; // previous tag -> (current tag -> P(current|previous))
+	 private static Map<String,Map<String, Double>> emission; // tag -> (word -> P(tag|word))
+	 
+	 /**
+	 * @param trainFile contains all the sentences 
+	 * @param tagFile contains all the tags for the words mentioned in trainfile
+	 * @function build training model using hidden Markov Model
+	 */
+	public void trainModel(String trainFile , String tagFile) {
+		 BufferedReader wordFileReader = null, tagFileReader = null;
+	        try{
+	        	wordFileReader = new BufferedReader(new FileReader(trainFile)); // Open train file
+	        	tagFileReader = new BufferedReader(new FileReader(tagFile)); // Open tag file
+	        } catch (Exception ex) {
+	        	System.err.println("Error in reading training Files");
+	        	ex.printStackTrace();
+	        }
+	        
+	        
+
+		 
+	 }
+
+}
