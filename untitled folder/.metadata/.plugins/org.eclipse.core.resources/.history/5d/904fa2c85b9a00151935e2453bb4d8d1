@@ -23,7 +23,7 @@ public class Scorer {
 		File testTagFile = new File("/Users/Prashant/NLPProject/brown-test-tags.txt");
 		File outputTagFile = new File("/Users/Prashant/NLPProject/brown-test-sentences_Viterbi_tag.txt");
 		File testFile = new File("/Users/Prashant/NLPProject/brown-test-sentences.txt");
-		File trainFile = new File("/Users/Prashant/NLPProject/brown-train-tags.txt");
+		File trainFile = new File("/Users/Prashant/NLPProject/brown-train-sentences.txt");
 		FileWriter outFile;
 
 		try {
