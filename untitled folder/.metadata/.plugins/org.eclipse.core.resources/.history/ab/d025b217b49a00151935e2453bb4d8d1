@@ -20,19 +20,14 @@ public class Scorer {
 
 		HashMap<String, HashMap<String, ArrayList<String>>> tagChosenForTag = new HashMap<String, HashMap<String, ArrayList<String>>>();
 
-		// File testTagFile = new File("/Users/Prashant/NLPProject/brown-test-tags.txt");
-		// c = new File("/Users/Prashant/NLPProject/brown-test-sentences_Viterbi_tag.txt");
-		// File testFile = new File("/Users/Prashant/NLPProject/brown-test-sentences.txt");
-		// File trainFile = new File("/Users/Prashant/NLPProject/brown-train-tags.txt");
-		File testTagFile = new File(args[0]);
-		File outputTagFile = new File(args[1]);
-		File testFile = new File(args[2]);
-		File trainFile = new File(args[3]);
-		
+		File testTagFile = new File("/Users/Prashant/NLPProject/brown-test-tags.txt");
+		File outputTagFile = new File("/Users/Prashant/NLPProject/brown-test-sentences_Viterbi_tag.txt");
+		File testFile = new File("/Users/Prashant/NLPProject/brown-test-sentences.txt");
+		File trainFile = new File("/Users/Prashant/NLPProject/brown-train-tags.txt");
 		FileWriter outFile;
 
 		try {
-			outFile = new FileWriter(new File("score.html"));
+			outFile = new FileWriter(new File("/Users/Prashant/NLPProject/score.html"));
 
 			Scanner testScanner = new Scanner(testTagFile);
 			Scanner outputScanner = new Scanner(outputTagFile);
@@ -49,7 +44,8 @@ public class Scorer {
 				outputPOS = outputScanner.next();
 
 				// Get the associated words
-
+				// String testWord = testScanner.next();
+				// String outputWord = outputScanner.next();
 				String testWord = test.next();
 				// Count agreement and disagreement
 				if (testPOS.equals(outputPOS)) {
@@ -66,7 +62,12 @@ public class Scorer {
 					tagChosenForTag.get(testPOS).put(outputPOS, new ArrayList<String>());
 				}
 				tagChosenForTag.get(testPOS).get(outputPOS).add(testWord);
+				// tagChosenForTag.get(testPOS).put(outputPOS,
+				// tagChosenForTag.get(testPOS).get(outputPOS)+1);
 
+				/* if (!testWord.equals(testWord)) {
+					System.out.println("line " + i + " ERROR: " + testWord + " does not match " + outputWord);
+				}*/
 			} // end of while loop
 
 			// Start printing the scoring output
@@ -86,6 +87,8 @@ public class Scorer {
 					+ (100.0 * (double) agreeCount / (double) (agreeCount + disagreeCount)) + "%</div>");
 
 			outFile.write("<table rules='all' cellpadding='5'>");
+			/*HMMParser p = new HMMParser("data/train.pos");
+			p.parseTrainer();*/
 			
 			parseTrainFile(trainFile);
 			outFile.write("<tr><th scope='col'></th>");

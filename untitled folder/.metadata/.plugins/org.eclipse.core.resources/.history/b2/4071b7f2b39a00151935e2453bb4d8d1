@@ -22,8 +22,6 @@ public class HMMImpl {
 		// String testFile = "/Users/Prashant/NLPProject/brown-test-sentences.txt";
 		// String testtagFile = "/Users/Prashant/NLPProject/brown-test-tags.txt";
 		
-		String testFile = args[2];
-		String testtagFile = args[3]; 
 		
 		Viterbi viterbi = new Viterbi();
 

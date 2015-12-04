@@ -8,10 +8,9 @@
 public class HMMImpl {
 	public static void main(String[] args) {
 		// read train files
-		// String trainFile = "/Users/Prashant/NLPProject/brown-train-sentences.txt";
-		// String traintagFile = "/Users/Prashant/NLPProject/brown-train-tags.txt";
-		String trainFile = args[0];
-		String traintagFile = args[1];
+		String trainFile = "/Users/Prashant/NLPProject/brown-train-sentences.txt";
+		String traintagFile = "/Users/Prashant/NLPProject/brown-train-tags.txt";
+
 		// build HMM model using training data sentence and tags
 		HMMModel hmmModel = new HMMModel();
 		hmmModel.trainModel(trainFile, traintagFile);
@@ -19,11 +18,8 @@ public class HMMImpl {
 
 		// read test files
 
-		// String testFile = "/Users/Prashant/NLPProject/brown-test-sentences.txt";
-		// String testtagFile = "/Users/Prashant/NLPProject/brown-test-tags.txt";
-		
-		String testFile = args[2];
-		String testtagFile = args[3]; 
+		String testFile = "/Users/Prashant/NLPProject/brown-test-sentences.txt";
+		String testtagFile = "/Users/Prashant/NLPProject/brown-test-tags.txt";
 		
 		Viterbi viterbi = new Viterbi();
 

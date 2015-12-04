@@ -20,19 +20,14 @@ public class Scorer {
 
 		HashMap<String, HashMap<String, ArrayList<String>>> tagChosenForTag = new HashMap<String, HashMap<String, ArrayList<String>>>();
 
-		// File testTagFile = new File("/Users/Prashant/NLPProject/brown-test-tags.txt");
-		// c = new File("/Users/Prashant/NLPProject/brown-test-sentences_Viterbi_tag.txt");
-		// File testFile = new File("/Users/Prashant/NLPProject/brown-test-sentences.txt");
-		// File trainFile = new File("/Users/Prashant/NLPProject/brown-train-tags.txt");
-		File testTagFile = new File(args[0]);
-		File outputTagFile = new File(args[1]);
-		File testFile = new File(args[2]);
-		File trainFile = new File(args[3]);
-		
+		File testTagFile = new File("/Users/Prashant/NLPProject/brown-test-tags.txt");
+		File outputTagFile = new File("/Users/Prashant/NLPProject/brown-test-sentences_Viterbi_tag.txt");
+		File testFile = new File("/Users/Prashant/NLPProject/brown-test-sentences.txt");
+		File trainFile = new File("/Users/Prashant/NLPProject/brown-train-tags.txt");
 		FileWriter outFile;
 
 		try {
-			outFile = new FileWriter(new File("score.html"));
+			outFile = new FileWriter(new File("/Users/Prashant/NLPProject/score.html"));
 
 			Scanner testScanner = new Scanner(testTagFile);
 			Scanner outputScanner = new Scanner(outputTagFile);
