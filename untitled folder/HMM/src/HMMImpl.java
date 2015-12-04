@@ -25,5 +25,10 @@ public class HMMImpl {
 
 		String newtagfile = viterbi.viterbionTestFile(testFile, hmmModel); // tag the file
 		System.out.println("The file is tagged and save as " + newtagfile + ".");
+		
+		HMMResult hmmResult = new HMMResult();
+		hmmResult.PrintStat(testtagFile, newtagfile);
+		hmmResult.ViterbiConsole(viterbi, hmmModel);
+		
 	}
 }

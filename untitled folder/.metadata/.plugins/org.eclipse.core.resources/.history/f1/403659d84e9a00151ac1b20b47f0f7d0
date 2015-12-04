@@ -1,0 +1,26 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ * @author Prashant
+ * @created_date 2nd Dec 2015
+ * @description This is a scorer class to calculate the score and build the table to show the differences
+ *
+ */
+public class Scorer {
+	
+	public static void main(String[] args) {
+		int agreeCount = 0;
+        int disagreeCount = 0;
+        
+        HashMap<String, HashMap<String, ArrayList<String>>> tagChosenForTag = new HashMap<String, HashMap<String, ArrayList<String>>>();
+        
+        File testFile = new File("/Users/Prashant/NLPProject/brown-test-sentences.txt");
+        File outputFile = new File("data/output.pos");
+        FileWriter outFile;
+
+	}
+
+}

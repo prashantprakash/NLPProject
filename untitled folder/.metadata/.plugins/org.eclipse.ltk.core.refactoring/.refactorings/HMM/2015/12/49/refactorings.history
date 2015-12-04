@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;HMMOperation&apos; to &apos;HMMResult&apos;&#x0A;- Original project: &apos;HMM&apos;&#x0A;- Original element: &apos;HMMOperation&apos;&#x0A;- Renamed element: &apos;HMMResult&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;HMMOperation&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{HMMOperation.java[HMMOperation" matchStrategy="1" name="HMMResult" qualified="false" references="true" similarDeclarations="false" stamp="1449137736598" textual="false" version="1.0"/>
+</session>
